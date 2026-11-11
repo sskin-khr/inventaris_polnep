@@ -12,32 +12,40 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <!-- Link Dashboard (Hanya untuk Admin) -->
                     @if(Auth::user()->role === 'admin')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
-                            {{ __('Data Aset') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
-                            {{ __('Kategori') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('locations.index')" :active="request()->routeIs('locations.*')">
-                            {{ __('Lokasi Ruangan') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('mutations.index')" :active="request()->routeIs('mutations.*')">
-                            {{ __('Riwayat Mutasi') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')">
-                            {{ __('Laporan Aset') }}
-                        </x-nav-link>
                     @else
-                        <!-- Link Beranda (Untuk Staf / User biasa) -->
                         <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Beranda') }}
                         </x-nav-link>
                     @endif
+
+                    <!-- Menu yang Tampil untuk Semua User & Admin -->
+                    <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
+                        {{ __('Data Aset') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                        {{ __('Kategori') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('locations.index')" :active="request()->routeIs('locations.*')">
+                        {{ __('Lokasi Ruangan') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('mutations.index')" :active="request()->routeIs('mutations.*')">
+                        {{ __('Riwayat Mutasi') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')">
+                        {{ __('Laporan') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('tickets.index')" :active="request()->routeIs('tickets.*')">
+                        {{ __('Lapor Kerusakan') }}
+                    </x-nav-link>
                 </div>
             </div>
 

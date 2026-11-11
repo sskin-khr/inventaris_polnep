@@ -4,9 +4,11 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Daftar Aset POLNEP') }}
             </h2>
-            <a href="{{ route('assets.create') }}" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700">
-                + Tambah Aset Baru
-            </a>
+            @if(Auth::user()->role === 'admin')
+                <a href="{{ route('assets.create') }}" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700">
+                    + Tambah Aset Baru
+                </a>
+            @endif
         </div>
     </x-slot>
 
@@ -28,7 +30,9 @@
                             <th class="px-4 py-3">Kategori</th>
                             <th class="px-4 py-3">Lokasi</th>
                             <th class="px-4 py-3">Kondisi</th>
-                            <th class="px-4 py-3">Aksi</th>
+                            @if(Auth::user()->role === 'admin')
+                                <th class="px-4 py-3">Aksi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -52,19 +56,21 @@
                                         {{ $asset->condition }}
                                     </span>
                                 </td>
-                                <td class="px-4 py-3 space-x-2">
-                                    <a href="{{ route('assets.edit', $asset->id) }}" class="text-blue-600 hover:underline">Edit</a>
-                                    <form action="{{ route('assets.destroy', $asset->id) }}" method="POST" class="inline" 
-                                        onsubmit="return confirm('Hapus aset ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:underline">Hapus</button>
-                                    </form>
-                                </td>
+                                @if(Auth::user()->role === 'admin')
+                                    <td class="px-4 py-3 space-x-2">
+                                        <a href="{{ route('assets.edit', $asset->id) }}" class="text-blue-600 hover:underline">Edit</a>
+                                        <form action="{{ route('assets.destroy', $asset->id) }}" method="POST" class="inline" 
+                                            onsubmit="return confirm('Hapus aset ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="px-6 py-4 text-center">Belum ada data aset tercatat.</td>
+                                <td colspan="{{ Auth::user()->role === 'admin' ? '7' : '6' }}" class="px-6 py-4 text-center">Belum ada data aset tercatat.</td>
                             </tr>
                         @endforelse
                     </tbody>
