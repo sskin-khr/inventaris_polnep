@@ -12,9 +12,26 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    <!-- Link Dashboard (Hanya untuk Admin) -->
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
+                            {{ __('Data Aset') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                            {{ __('Kategori') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('locations.index')" :active="request()->routeIs('locations.*')">
+                            {{ __('Lokasi Ruangan') }}
+                        </x-nav-link>
+                    @else
+                        <!-- Link Beranda (Untuk Staf / User biasa) -->
+                        <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                            {{ __('Beranda') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
