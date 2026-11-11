@@ -26,6 +26,12 @@
                         <x-nav-link :href="route('locations.index')" :active="request()->routeIs('locations.*')">
                             {{ __('Lokasi Ruangan') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('mutations.index')" :active="request()->routeIs('mutations.*')">
+                            {{ __('Riwayat Mutasi') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')">
+                            {{ __('Laporan Aset') }}
+                        </x-nav-link>
                     @else
                         <!-- Link Beranda (Untuk Staf / User biasa) -->
                         <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
